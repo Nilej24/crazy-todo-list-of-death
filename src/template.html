@@ -3,8 +3,73 @@
 <head>
   <title>wow so organised</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1 class="p-5">hi</h1>
+  <div class="container-fluid">
+    <div class="row flex-column-reverse flex-md-row justify-content-end min-vh-100">
+      <!-- left side with projects and stuff -->
+      <section class="col-md-9 col-lg-10 me-sm-auto bg-dark text-light p-3 vh-100">
+        <h2 class="m-3">Your Projects</h2>
+        <div id="projects">
+          <div class="project p-4 card bg-danger mt-4">
+            <h3 class="mb-3 d-flex">
+              General
+              <button class="btn btn-dark ms-auto">
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <button class="btn btn-dark mx-2">
+                <i class="bi bi-trash"></i>
+              </button>
+              <button class="btn btn-dark">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </h3>
+            <p>Elit ex at esse doloremque odio, vero? Adipisci quaerat architecto possimus nostrum vero tempora. Quas minima cumque autem perspiciatis doloribus.</p>
+            <p>due monday</p>
+            <div class="todos accordion text-dark">
+              <div class="todo accordion-item">
+                <div class="accordion-header d-flex">
+                  <div class="form-check m-3">
+                    <input class="form-check-input" type="checkbox" id="general-1-check">
+                    <label class="form-check-label" for="general-1-check">
+                      hi
+                    </label>
+                  </div>
+                  <div class="alert alert-warning m-0 ms-auto">
+                    <i class="bi bi-exclamation-triangle"></i>
+                  </div>
+                  <button class="btn mx-2">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#general-1-collapse"></button>
+                </div>
+                <div id="general-1-collapse" class="accordion-collapse collapse">
+                  <hr class="m-0">
+                  <div class="accordion-body">
+                      say hi
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- menu bar on the right with actions and stuff -->
+      <section class="col-md-3 col-lg-2 sticky-sm-top bg-white">
+        <h1 class="my-3">Crazy Todo-List of Death</h1>
+        <div class="list-group list-group-flush">
+          <button class="d-flex align-items-center list-group-item list-group-item-action">
+            <i class="bi bi-folder-plus"></i>
+            <div class="ms-3">New Project</div>
+          </button>
+          <button class="d-flex align-items-center list-group-item list-group-item-action">
+            <i class="bi bi-trash"></i>
+            <div class="ms-3">Delete All Completed</div>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
 </body>
 </html>
