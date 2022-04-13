@@ -20,16 +20,45 @@ Project.prototype.removeDoneTodos = function (index) {
 
 };
 
-// gonna be generateDisplay later
-Project.prototype.generateText = function () {
-  let message = "";
-  message += "title: " + this.title;
-  message += "\ndescription: " + this.title;
-  message += "\ndue date: " + this.dueDate;
-  message += "\ntodos: " + this.todos.length;
-  return message;
+Project.prototype.generateDisplay = function () {
+
+  // title + top buttons
+  const head = document.createElement("h3");
+  head.classList.add("mb-3", "d-flex");
+  head.innerText = this.title;
+  head.innerHTML += `
+    <button class="btn btn-dark ms-auto" data-bs-toggle="modal" data-bs-target="#new-todo">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+    <button class="btn btn-dark mx-2">
+      <i class="bi bi-trash"></i>
+    </button>
+    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#edit-project">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+  `;
+
+  // description
+  const desc = document.createElement("p");
+  desc.innerText = this.description;
+
+  // due date
+  const due = document.createElement("p");
+  due.innerText = this.dueDate;
+
+  //todos
+  const todoList = document.createElement("div");
+  todoList.classList.add("accordion", "text-dark");
+  for(let i = 0; i < this.todos.length; i++) {
+    const todoElement = this.todos[i].generateDisplay(this.title, i);
+    todoList.append(todoElement);
+  }
+
+  // add to dom
+  const element = document.createElement("div");
+  element.classList.add("p-4", "card", "bg-primary", "mt-4");
+  element.append(head, desc, due, todoList);
+  document.querySelector("#projects").append(element);
 };
 
-Project.prototype.showTodos = function () {
-  this.todos.forEach(todo => console.log(todo.generateText()));
-};
+export default Project;
