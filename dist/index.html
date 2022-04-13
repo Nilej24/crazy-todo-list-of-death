@@ -9,19 +9,19 @@
   <div class="container-fluid">
     <div class="row flex-column-reverse flex-md-row justify-content-end min-vh-100">
       <!-- left side with projects and stuff -->
-      <section class="col-md-9 col-lg-10 me-sm-auto bg-dark text-light p-3 vh-100">
+      <section class="col-md-9 col-lg-10 me-sm-auto bg-dark text-light p-3">
         <h2 class="m-3">Your Projects</h2>
         <div id="projects">
-          <div class="project p-4 card bg-danger mt-4">
+          <div class="project p-4 card bg-primary mt-4">
             <h3 class="mb-3 d-flex">
               General
-              <button class="btn btn-dark ms-auto">
+              <button class="btn btn-dark ms-auto" data-bs-toggle="modal" data-bs-target="#new-todo">
                 <i class="bi bi-plus-lg"></i>
               </button>
               <button class="btn btn-dark mx-2">
                 <i class="bi bi-trash"></i>
               </button>
-              <button class="btn btn-dark">
+              <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#edit-project">
                 <i class="bi bi-pencil-square"></i>
               </button>
             </h3>
@@ -39,7 +39,7 @@
                   <div class="alert alert-warning m-0 ms-auto">
                     <i class="bi bi-exclamation-triangle"></i>
                   </div>
-                  <button class="btn mx-2">
+                  <button class="btn mx-2" data-bs-toggle="modal" data-bs-target="#edit-todo">
                     <i class="bi bi-pencil-square"></i>
                   </button>
                   <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#general-1-collapse"></button>
@@ -47,7 +47,7 @@
                 <div id="general-1-collapse" class="accordion-collapse collapse">
                   <hr class="m-0">
                   <div class="accordion-body">
-                      say hi
+                    say hi <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>a
                   </div>
                 </div>
               </div>
@@ -56,10 +56,10 @@
         </div>
       </section>
       <!-- menu bar on the right with actions and stuff -->
-      <section class="col-md-3 col-lg-2 sticky-sm-top bg-white">
+      <section id="side-menu" class="col-md-3 col-lg-2 sticky-top bg-white">
         <h1 class="my-3">Crazy Todo-List of Death</h1>
         <div class="list-group list-group-flush">
-          <button class="d-flex align-items-center list-group-item list-group-item-action">
+          <button type="button" class="d-flex align-items-center list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#new-project">
             <i class="bi bi-folder-plus"></i>
             <div class="ms-3">New Project</div>
           </button>
@@ -69,6 +69,148 @@
           </button>
         </div>
       </section>
+    </div>
+  </div>
+
+  <!-- modals -->
+
+  <!-- new project -->
+  <div class="modal fade" id="new-project" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-project-form">
+            <div class="mb-3">
+              <label for="project-title">Title</label>
+              <input id="project-title" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="project-description">Description</label>
+              <textarea class="form-control" id="project-description"></textarea>
+            </div>
+            <div>
+              <label for="project-due-date">Due Date</label>
+              <input id="project-due-date" type="date" class="d-block">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          <button type="submit" form="new-project-form" class="btn btn-primary">Add Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit project -->
+  <div class="modal fade" id="edit-project" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-project-form">
+            <div class="mb-3">
+              <label for="project-title">Title</label>
+              <input id="project-title" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="project-description">Description</label>
+              <textarea class="form-control" id="project-description"></textarea>
+            </div>
+            <div>
+              <label for="project-due-date">Due Date</label>
+              <input id="project-due-date" type="date" class="d-block">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">Delete Project</button>
+          <button type="submit" form="edit-project-form" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- new todo -->
+  <div class="modal fade" id="new-todo" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New Todo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-todo-form">
+            <div class="mb-3">
+              <label for="todo-title">Title</label>
+              <input id="todo-title" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="todo-description">Description</label>
+              <textarea class="form-control" id="todo-description"></textarea>
+            </div>
+            <div>
+              <label for="todo-priority">Priority</label>
+              <select id="todo-priority" class="form-select">
+                <option value="0" selected>None</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          <button type="submit" form="new-todo-form" class="btn btn-primary">Add Todo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit todo -->
+  <div class="modal fade" id="edit-todo" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Todo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-todo-form">
+            <div class="mb-3">
+              <label for="todo-title">Title</label>
+              <input id="todo-title" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="todo-description">Description</label>
+              <textarea class="form-control" id="todo-description"></textarea>
+            </div>
+            <div>
+              <label for="todo-priority">Priority</label>
+              <select id="todo-priority" class="form-select">
+                <option value="0" selected>None</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger">Delete Todo</button>
+          <button type="submit" form="edit-todo-form" class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
