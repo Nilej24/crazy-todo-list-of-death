@@ -12,15 +12,21 @@ Project.prototype.addTodo = function (title, description, priority) {
   this.todos.push(new Todo(title, description, priority));
 };
 
-Project.prototype.removeDoneTodos = function (index) {
+Project.prototype.removeDoneTodos = function (projectIndex) {
 
-  for(let i = 0; i < this.todos.length; i++)
-    if(this.todos[i].done)
-      this.todos.splice(index, 1);
+  for(let i = 0; i < this.todos.length; i++) {
+    const todoCheckBox = document.querySelector(`#p${projectIndex}-${i}-check`);
+    if(todoCheckBox.checked) {
+      this.todos.splice(i, 1, 0); // 0 is subbed in so the indexes don't mess up
+    }
+  }
+
+  this.todos = this.todos.filter(todo => todo != 0);
+  console.log(this.todos);
 
 };
 
-Project.prototype.generateDisplay = function () {
+Project.prototype.generateDisplay = function (projectIndex) {
 
   // title + top buttons
   const head = document.createElement("h3");
@@ -30,7 +36,7 @@ Project.prototype.generateDisplay = function () {
     <button class="btn btn-dark ms-auto" data-bs-toggle="modal" data-bs-target="#new-todo">
       <i class="bi bi-plus-lg"></i>
     </button>
-    <button class="btn btn-dark mx-2">
+    <button class="btn btn-dark mx-2 trash-button">
       <i class="bi bi-trash"></i>
     </button>
     <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#edit-project">
@@ -50,15 +56,16 @@ Project.prototype.generateDisplay = function () {
   const todoList = document.createElement("div");
   todoList.classList.add("accordion", "text-dark");
   for(let i = 0; i < this.todos.length; i++) {
-    const todoElement = this.todos[i].generateDisplay(this.title, i);
+    const todoElement = this.todos[i].generateDisplay(projectIndex, i);
     todoList.append(todoElement);
   }
 
   // add to dom
   const element = document.createElement("div");
   element.classList.add("p-4", "card", "bg-primary", "mt-4");
+  element.dataset.projectIndex = projectIndex;
   element.append(head, desc, due, todoList);
-  document.querySelector("#projects").append(element);
+  return element;
 };
 
 export default Project;

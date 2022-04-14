@@ -5,8 +5,8 @@ function Todo(title, description, priority) {
   this.done = false;
 }
 
-// gonna be generateDisplay later
-Todo.prototype.generateDisplay = function (projectTitle, todoIndex) {
+// generates element to be appended to project
+Todo.prototype.generateDisplay = function (projectIndex, todoIndex) {
 
   // header
   const header = document.createElement("div");
@@ -16,7 +16,7 @@ Todo.prototype.generateDisplay = function (projectTitle, todoIndex) {
   const checkInput = document.createElement("input");
   checkInput.classList.add("form-check-input");
   checkInput.type = "checkbox";
-  checkInput.id = `${projectTitle}-${todoIndex}-check`;
+  checkInput.id = `p${projectIndex}-${todoIndex}-check`;
 
   const checkLabel = document.createElement("label");
   checkLabel.classList.add("form-check-label");
@@ -50,21 +50,21 @@ Todo.prototype.generateDisplay = function (projectTitle, todoIndex) {
       <button class="btn mx-2" data-bs-toggle="modal" data-bs-target="#edit-todo">
         <i class="bi bi-pencil-square"></i>
       </button>
-      <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#${projectTitle}-${todoIndex}-collapse"></button>
+      <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#${projectIndex}-${todoIndex}-collapse"></button>
     `;
   } else {
     header.innerHTML += `
       <button class="btn mx-2 ms-auto" data-bs-toggle="modal" data-bs-target="#edit-todo">
         <i class="bi bi-pencil-square"></i>
       </button>
-      <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#${projectTitle}-${todoIndex}-collapse"></button>
+      <button class="accordion-button collapsed w-auto bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#${projectIndex}-${todoIndex}-collapse"></button>
     `;
   }
   // header end
 
   // collapsing description
   const collapse = document.createElement("div");
-  collapse.id = `${projectTitle}-${todoIndex}-collapse`;
+  collapse.id = `${projectIndex}-${todoIndex}-collapse`;
   collapse.classList.add("accordion-collapse", "collapse");
 
   const hr = document.createElement("hr");
@@ -79,7 +79,9 @@ Todo.prototype.generateDisplay = function (projectTitle, todoIndex) {
 
   // return element
   const element = document.createElement("div");
+  element.id = projectIndex + "-" + todoIndex;
   element.classList.add("accordion-item");
+  element.dataset.todoIndex = todoIndex;
   element.append(header, collapse);
   return element;
 };
