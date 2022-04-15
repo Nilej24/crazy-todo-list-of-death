@@ -63,7 +63,7 @@
             <i class="bi bi-folder-plus"></i>
             <div class="ms-3">New Project</div>
           </button>
-          <button class="d-flex align-items-center list-group-item list-group-item-action">
+          <button  id="delete-all-completed" class="d-flex align-items-center list-group-item list-group-item-action">
             <i class="bi bi-trash"></i>
             <div class="ms-3">Delete All Completed</div>
           </button>
@@ -117,22 +117,22 @@
         <div class="modal-body">
           <form id="edit-project-form">
             <div class="mb-3">
-              <label for="project-title">Title</label>
-              <input id="project-title" type="text" class="form-control">
+              <label for="project-title-edit">Title</label>
+              <input id="project-title-edit" type="text" class="form-control">
             </div>
             <div class="mb-3">
-              <label for="project-description">Description</label>
-              <textarea class="form-control" id="project-description"></textarea>
+              <label for="project-description-edit">Description</label>
+              <textarea class="form-control" id="project-description-edit"></textarea>
             </div>
             <div>
-              <label for="project-due-date">Due Date</label>
-              <input id="project-due-date" type="date" class="d-block">
+              <label for="project-due-date-edit">Due Date</label>
+              <input id="project-due-date-edit" type="date" class="d-block">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger">Delete Project</button>
+          <button type="button" class="btn btn-danger" id="delete-project-btn">Delete Project</button>
           <button type="submit" form="edit-project-form" class="btn btn-primary">Save changes</button>
         </div>
       </div>
@@ -187,16 +187,16 @@
         <div class="modal-body">
           <form id="edit-todo-form">
             <div class="mb-3">
-              <label for="todo-title">Title</label>
-              <input id="todo-title" type="text" class="form-control">
+              <label for="todo-title-edit">Title</label>
+              <input id="todo-title-edit" type="text" class="form-control">
             </div>
             <div class="mb-3">
-              <label for="todo-description">Description</label>
-              <textarea class="form-control" id="todo-description"></textarea>
+              <label for="todo-description-edit">Description</label>
+              <textarea class="form-control" id="todo-description-edit"></textarea>
             </div>
             <div>
-              <label for="todo-priority">Priority</label>
-              <select id="todo-priority" class="form-select">
+              <label for="todo-priority-edit">Priority</label>
+              <select id="todo-priority-edit" class="form-select">
                 <option value="0" selected>None</option>
                 <option value="1">Low</option>
                 <option value="2">Medium</option>
@@ -207,7 +207,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger">Delete Todo</button>
+          <button type="button" class="btn btn-danger" id="delete-todo-btn">Delete Todo</button>
           <button type="submit" form="edit-todo-form" class="btn btn-primary">Save Changes</button>
         </div>
       </div>

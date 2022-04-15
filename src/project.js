@@ -12,18 +12,8 @@ Project.prototype.addTodo = function (title, description, priority) {
   this.todos.push(new Todo(title, description, priority));
 };
 
-Project.prototype.removeDoneTodos = function (projectIndex) {
-
-  for(let i = 0; i < this.todos.length; i++) {
-    const todoCheckBox = document.querySelector(`#p${projectIndex}-${i}-check`);
-    if(todoCheckBox.checked) {
-      this.todos.splice(i, 1, 0); // 0 is subbed in so the indexes don't mess up
-    }
-  }
-
-  this.todos = this.todos.filter(todo => todo != 0);
-  console.log(this.todos);
-
+Project.prototype.removeDoneTodos = function () {
+  this.todos = this.todos.filter(todo => !todo.done);
 };
 
 Project.prototype.generateDisplay = function (projectIndex) {
@@ -50,7 +40,7 @@ Project.prototype.generateDisplay = function (projectIndex) {
 
   // due date
   const due = document.createElement("p");
-  due.innerText = this.dueDate;
+  due.innerText = this.dueDate ? "due: " + this.dueDate : "";
 
   //todos
   const todoList = document.createElement("div");
