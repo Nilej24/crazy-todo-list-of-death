@@ -14,7 +14,7 @@ Todo.prototype.generateDisplay = function (projectIndex, todoIndex) {
 
   // check group
   const checkInput = document.createElement("input");
-  checkInput.classList.add("form-check-input", "ms-1", "me-2");
+  checkInput.classList.add("form-check-input", "ms-1", "me-3", "d-flex", "align-items-center");
   checkInput.type = "checkbox";
   if(this.done)
     checkInput.setAttribute("checked", "");
@@ -83,4 +83,6 @@ Todo.prototype.generateDisplay = function (projectIndex, todoIndex) {
   return element;
 };
 
+const todoProto = Todo.prototype;
+export {todoProto};
 export default Todo;

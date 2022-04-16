@@ -1,7 +1,8 @@
 import "bootstrap";
 
 import "./main.scss";
-import Project from "./project.js";
+import Project, {projectProto} from "./project.js";
+import {todoProto} from "./todo.js";
 
 let projects = [];
 let currentProj; // corresponding object for the last project clicked on
@@ -66,6 +67,7 @@ function generateDisplay() {
     trashBtns[i].addEventListener("click", function () {
       currentProj.removeDoneTodos();
       generateDisplay();
+      save();
     });
   }
 
@@ -100,6 +102,7 @@ document.querySelector("#new-project-form").addEventListener("submit", function 
 
   addProject(titleInput.value, descInput.value, dueInput.value);
   generateDisplay();
+  save();
   ev.target.reset();
 });
 
@@ -114,6 +117,7 @@ newTodoForm.addEventListener("submit", function (ev) {
 
   currentProj.addTodo(titleInput.value, descInput.value, priorityInput.value);
   generateDisplay();
+  save();
   ev.target.reset();
 });
 
@@ -126,12 +130,14 @@ editProjForm.addEventListener("submit", function (ev) {
   currentProj.description = document.querySelector('#edit-project-form textarea').value;
   currentProj.dueDate = document.querySelector('#edit-project-form input[type="date"]').value;
   generateDisplay();
+  save();
 });
 
 // delete project using edit project modal
 document.querySelector("#delete-project-btn").addEventListener("click", function (ev) {
   projects = projects.filter(proj => proj != currentProj);
   generateDisplay();
+  save();
 });
 
 // edit todo form
@@ -143,23 +149,44 @@ editTodoForm.addEventListener("submit", function (ev) {
   currentTodo.description = editTodoForm.querySelector('textarea').value;
   currentTodo.priority = editTodoForm.querySelector("select").value;
   generateDisplay();
+  save();
 });
 
 // delete todo using edit todo modal
 document.querySelector("#delete-todo-btn").addEventListener("click", function (ev) {
   currentProj.todos = currentProj.todos.filter(todo => todo != currentTodo);
   generateDisplay();
+  save();
 });
 
-// delete all done todos + completed projects
+// delete all done todos
 document.querySelector("#delete-all-completed").addEventListener("click", function (ev) {
   projects.forEach(function (proj) {
     proj.removeDoneTodos();
   });
   generateDisplay();
+  save();
 });
 
-addProject("test", "pretty sure this should work", "6969-09-24");
-projects[0].addTodo("test 1", "ok its working", 1);
-projects[0].addTodo("test 2", "pog", 0);
+// saves all data to localStorage
+function save() {
+  localStorage.projects = JSON.stringify(projects);
+}
+
+// load projects from prev sessions
+const oldProjects = localStorage.projects;
+if(!!oldProjects) {
+  projects = JSON.parse(oldProjects);
+  for(let i = 0; i < projects.length; i++) {
+    projects[i] = Object.assign(projects[i], projectProto);
+
+    for(let j = 0; j < projects[i].todos.length; j++) {
+      projects[i].todos[j] = Object.assign(projects[i].todos[j], todoProto);
+    }
+  }
+} else {
+  addProject("Welcome", "press the + button to start adding stuff to your list,\nthe trash button to delete things you've ticked off,\nor the pen button to edit the project", "");
+  projects[0].addTodo("click the pen button to edit, and the drop down arrow to see the description -->", "yoooooooooo", 0);
+}
+
 generateDisplay();

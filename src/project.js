@@ -58,4 +58,6 @@ Project.prototype.generateDisplay = function (projectIndex) {
   return element;
 };
 
+const projectProto = Project.prototype;
+export {projectProto};
 export default Project;
