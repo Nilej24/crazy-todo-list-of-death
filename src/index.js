@@ -175,7 +175,7 @@ function save() {
 
 // load projects from prev sessions
 const oldProjects = localStorage.projects;
-if(!!oldProjects) {
+if(!!oldProjects && oldProjects != "[]") {
   projects = JSON.parse(oldProjects);
   for(let i = 0; i < projects.length; i++) {
     projects[i] = Object.assign(projects[i], projectProto);
